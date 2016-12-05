@@ -17,6 +17,9 @@ td:first-child {
 .highlight {
 	background-color: #F6D8CE;
 }
+.blue-highlight {
+	background-color: #A9F5F2;
+}
 </style>
 <table cellspacing="0" cellpadding="3">
 <tr><th>Ingredient Name</th><th>Effect 1</th><th>Effect 2</th><th>Effect 3</th><th>Effect 4</th></tr>
@@ -122,13 +125,19 @@ td:first-child {
 <script>
 $('td').click(function() {
 	var targetText = $(this).text();
-	console.log(targetText);
+	
+	// remove previous highlights
+	$('td').each(function() {
+		$(this).removeClass('highlight');
+		$(this).closest('tr').find('td:first').removeClass('blue-highlight');
+	});
+
+	// replace new highlights
 	$('td').each(function() {
 		var thisText = $(this).text();
 		if(thisText === targetText) {
 			$(this).addClass('highlight');
-		} else {
-			$(this).removeClass('highlight');
+			$(this).closest('tr').find('td:first').addClass('blue-highlight');
 		}
 	});
 });
